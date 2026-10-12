@@ -1,0 +1,22 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        row = [set() for _ in range(9)]
+        col = [set() for _ in range(9)]
+        block = [set() for _ in range(9)]
+
+        for r in range(9):
+            for c in range(9):
+                val = board[r][c]
+                if val == '.':
+                    continue
+ 
+                idx = (r//3)*3 + (c//3)
+
+                if val in row[r] or val in col[c] or val in block[idx]:
+                    return False
+
+                row[r].add(val)
+                col[c].add(val)
+                block[idx].add(val)    
+
+        return True        
